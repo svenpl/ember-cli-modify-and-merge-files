@@ -1,14 +1,18 @@
 {
-  "name": "broccoli-modify-and-merge-files",
+  "name": "ember-cli-modify-and-merge-files",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "ember-addon"
+  ],
   "author": "Sven Plock",
   "license": "MIT",
   "devDependencies": {
+    "broccoli-merge-trees": "^1.1.4",
     "broccoli-plugin": "^1.2.2",
     "mkdirp": "^0.5.1"
   }

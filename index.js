@@ -5,6 +5,7 @@ var Path = require('path');
 var FS = require('fs');
 var Funnel = require('broccoli-funnel');
 var mkdirp = require('mkdirp');
+var mergeTrees = require('broccoli-merge-trees');
 
 // Create a subclass ModifyAndMergeFiles derived from Plugin
 ModifyAndMergeFiles.prototype = Object.create(Plugin.prototype);
@@ -41,4 +42,16 @@ ModifyAndMergeFiles.prototype.build = function() {
   FS.writeFileSync(fullOutputPath, outputFile);
 };
 
-module.exports = ModifyAndMergeFiles;
+module.exports = {
+  name: 'ember-cli-modify-and-merge-files',
+
+  treeForApp: function() {
+    var modifyFiles = (this.app && this.app.options && this.app.options.modifyFiles) || [];
+
+    var trees = modifyFiles.map(function(file) {
+      return ModifyAndMergeFiles(this.app.trees.app, file);
+    });
+
+    return mergeTrees(trees)
+  }
+};
