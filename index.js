@@ -48,8 +48,8 @@ module.exports = {
   treeForApp: function() {
     var modifyFiles = (this.app && this.app.options && this.app.options.modifyFiles) || [];
 
-    var trees = modifyFiles.map(function(file) {
-      return ModifyAndMergeFiles(this.app.trees.app, file);
+    var trees = modifyFiles.map(fileOptions => {
+      return ModifyAndMergeFiles(fileOptions.inputPath || this.app.trees.app, fileOptions);
     });
 
     return mergeTrees(trees)
